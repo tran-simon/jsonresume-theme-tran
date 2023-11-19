@@ -1,6 +1,7 @@
 var fs = require("fs");
 var Handlebars = require("handlebars");
 var moment = require("moment");
+var marked = require('marked')
 var _ = require("underscore");
 
 // From http://stackoverflow.com/a/16315366/3353747
@@ -18,6 +19,28 @@ Handlebars.registerHelper('ifCond', function(cond1, operator, cond2, options) {
 			return (cond1 || cond2) ? options.fn(this) : options.inverse(this);
 		break;
 	}
+});
+
+Handlebars.registerHelper('formatLink', (url)=>{
+	return url.replace("https://www.", "")
+})
+
+Handlebars.registerHelper({
+	concat: function () {
+		let res = '';
+
+		for (let arg in arguments) {
+			if (typeof arguments[arg] !== 'object') {
+				res += arguments[arg];
+			}
+		}
+
+		return res;
+	}
+})
+
+Handlebars.registerHelper('markdown', function(content) {
+	return marked.parse(content);
 });
 
 function render(resume) {

@@ -6,18 +6,19 @@
   "main": "index.js",
   "license": "MIT",
   "repository": {
-  	"type": "git",
-  	"url": "https://github.com/yesdevnull/jsonresume-theme-contempo.git"
+    "type": "git",
+    "url": "https://github.com/yesdevnull/jsonresume-theme-contempo.git"
   },
   "keywords": [
-  	"jsonresume",
-  	"theme",
-  	"contempo"
+    "jsonresume",
+    "theme",
+    "contempo"
   ],
   "homepage": "https://github.com/yesdevnull/jsonresume-theme-contempo",
   "dependencies": {
     "handlebars": "^2.0.0-alpha.4",
-    "underscore": "^1.6.0",
-    "moment": "^2.8.1"
+    "marked": "^10.0.0",
+    "moment": "^2.8.1",
+    "underscore": "^1.6.0"
   }
 }
