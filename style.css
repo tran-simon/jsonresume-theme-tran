@@ -1,6 +1,9 @@
 body {
   background: #fff;
-  font: 15px Arial, Helvetica, sans-serif;
+  font:
+    15px Arial,
+    Helvetica,
+    sans-serif;
   line-height: 1.4;
   margin-bottom: 100px;
 }
@@ -45,8 +48,8 @@ h1 {
 }
 
 #basics {
-	margin-top: 0;
-	margin-bottom: 20px;
+  margin-top: 0;
+  margin-bottom: 20px;
 }
 
 #basics ul {
@@ -117,7 +120,6 @@ blockquote {
   margin: 0 auto;
   max-width: 816px;
 }
-
 
 #location strong {
   clear: both;
