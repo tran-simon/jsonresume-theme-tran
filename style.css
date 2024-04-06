@@ -1,15 +1,30 @@
 body {
   background: #fff;
   font:
-    15px Arial,
-    Helvetica,
-    sans-serif;
-  line-height: 1.4;
-  margin-bottom: 100px;
+    14px "Computer Modern",
+    "Latin Modern",
+    "TeX Gyre Pagella",
+    serif;
+  line-height: 1.2;
+  margin: 1em;
+}
+
+.fas,
+.fa-brands {
+  width: 1em;
+}
+
+.link {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25em;
+  color: #000;
+  text-decoration: none;
 }
 
 a {
   font-style: italic;
+  font-family: "Computer Modern", "Latin Modern Math", "TeX Gyre Pagella", serif;
 }
 
 em {
@@ -21,17 +36,38 @@ p {
 }
 
 ul {
-  margin-bottom: 0;
+  margin: 0;
+  padding-inline-start: 2em;
 }
 
 section {
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }
 
 h1 {
   font-weight: 300;
   margin-bottom: 0;
   margin-top: 0;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.25em;
+  text-transform: uppercase;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 1em;
+  max-width: 70%;
+  display: inline-block;
+}
+
+h4 {
+  display: inline-block;
+  font-weight: normal;
+  margin: 0;
 }
 
 .divided {
@@ -43,96 +79,106 @@ h1 {
   text-align: right;
 }
 
-.right div {
-  text-wrap: nowrap;
-}
-
-#basics {
+header {
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 1em;
 }
 
-#basics ul {
+header ul {
   list-style: none;
   text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
-#basics a {
-  color: #000;
-  text-decoration: none;
+footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: rgba(0, 0, 0, 0.5) !important;
+  font-style: italic;
+  font-size: small;
+}
+
+footer a {
+  color: rgba(0, 0, 0, 0.5) !important;
 }
 
 section {
+  padding-top: 0.25em;
   border-top: 3px solid #000;
-}
-
-section h2 {
-  margin-top: 4px;
-  margin-bottom: 6px;
-  text-transform: uppercase;
-  color: #000;
-  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
 }
 
 section .item {
-  margin: 0 0 20px;
   padding: 0;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125em;
 }
 
-#position h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  font-size: 15px;
-  max-width: 70%;
-  display: inline-block;
-}
-
-#position h4 {
-  display: inline-block;
+.summary {
   font-style: italic;
-  font-weight: normal;
-  margin: 0;
+  color: rgba(0, 0, 0, 0.65);
 }
 
-#position span {
-  font-style: italic;
+.subtitle {
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.inline {
+  display: flex;
+  gap: 1em;
 }
 
 section .item p {
   margin: 0;
 }
 
-section .item ul {
-  margin-top: 0;
-}
-
-blockquote {
-  margin: 0;
-  margin-bottom: 1em;
-}
-
-.item {
-  margin-bottom: 1em;
-}
-
 #resume {
+  position: relative;
+  height: fit-content;
   margin: 0 auto;
   max-width: 816px;
+
+  display: flex;
+  flex-direction: column;
 }
 
-#location strong {
-  clear: both;
-  float: left;
-  line-height: 1.3;
-  width: 120px;
+.link-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
-#skills {
-  overflow: hidden;
+.inline-list-container {
+  line-height: 1;
+
+  padding-left: 2em;
+  text-indent: -1em;
 }
 
-#skills .item {
-  float: left;
-  width: 50%;
+.inline-list {
+  display: inline;
+  list-style: none;
+  margin-block: 0;
+  margin-inline: 0;
+  padding-inline: 0;
+}
+
+.inline-list li {
+  display: inline;
+}
+
+.inline-list li:not(:last-child):after {
+  content: ",";
 }

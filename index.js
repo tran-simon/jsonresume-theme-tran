@@ -1,28 +1,25 @@
-var fs = require("fs");
-var Handlebars = require("handlebars");
-var moment = require("moment");
-var marked = require("marked");
-var _ = require("underscore");
+let fs = require("fs");
+let Handlebars = require("handlebars");
+let moment = require("moment");
+let marked = require("marked");
+let _ = require("underscore");
 
 // From http://stackoverflow.com/a/16315366/3353747
 Handlebars.registerHelper("ifCond", function (cond1, operator, cond2, options) {
   switch (operator) {
     case "==":
-      return cond1 == cond2 ? options.fn(this) : options.inverse(this);
-      break;
+      return cond1 === cond2 ? options.fn(this) : options.inverse(this);
 
     case "&&":
       return cond1 && cond2 ? options.fn(this) : options.inverse(this);
-      break;
 
     case "||":
       return cond1 || cond2 ? options.fn(this) : options.inverse(this);
-      break;
   }
 });
 
 Handlebars.registerHelper("formatLink", (url) => {
-  return url.replace("https://www.", "");
+  return url.replace("https://", "").replace("www.", "");
 });
 
 Handlebars.registerHelper({
@@ -44,39 +41,48 @@ Handlebars.registerHelper("markdown", function (content) {
 });
 
 function render(resume) {
-  var css = fs.readFileSync(__dirname + "/style.css", "utf-8");
-  var tpl = fs.readFileSync(__dirname + "/resume.hbs", "utf-8");
+  const css = fs.readFileSync(__dirname + "/style.css", "utf-8");
+  const tpl = fs.readFileSync(__dirname + "/resume.hbs", "utf-8");
 
-  _.each(resume.work, function (work_info) {
-    var startDate = work_info.startDate && new Date(work_info.startDate),
-      endDate = work_info.endDate && new Date(work_info.endDate);
+  const getTime = (info, format = "MMM YYYY") => {
+    const [startFormat, endFormat] = Array.isArray(format)
+      ? format
+      : [format, format];
+
+    const startDate = info.startDate && new Date(info.startDate);
+    const endDate = info.endDate && new Date(info.endDate);
+
+    let time = "";
 
     if (startDate) {
-      work_info.time = moment(startDate).format("MMM YYYY");
+      time = moment(startDate).format(startFormat);
     }
 
     if (endDate) {
-      work_info.time =
-        work_info.time + " – " + moment(endDate).format("MMM YYYY");
+      time += " – " + moment(endDate).format(endFormat);
     }
 
     if (startDate && !endDate) {
-      work_info.time = work_info.time + " – Present";
+      time += " – Current";
     }
 
-    if (!startDate && !endDate) {
-      work_info.time = "";
-    }
+    return time;
+  };
+
+  _.each(resume.work, function (work_info) {
+    work_info.time = getTime(work_info);
   });
 
   _.each(resume.education, function (education_info) {
-    var endDate = education_info.endDate && new Date(education_info.endDate);
+    education_info.time = getTime(education_info, "MMMM YYYY");
+  });
 
-    education_info.completed = moment(endDate).format("MMMM YYYY");
+  _.each(resume.projects, function (project_info) {
+    project_info.time = getTime(project_info, ["MMM", "MMM YYYY"]);
   });
 
   _.each(resume.awards, function (award_info) {
-    var date = award_info.date && new Date(award_info.date);
+    const date = award_info.date && new Date(award_info.date);
 
     award_info.awarded = moment(date).format("YYYY");
   });
@@ -89,4 +95,7 @@ function render(resume) {
 
 module.exports = {
   render: render,
+  pdfRenderOptions: {
+    format: "legal",
+  },
 };
